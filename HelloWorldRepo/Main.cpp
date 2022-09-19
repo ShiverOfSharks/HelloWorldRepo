@@ -72,9 +72,10 @@ Would be easiest to implement, but needs to recognize where user has already inp
 int x = 0; // x axis for playermove
 int y = 0; // y axis for playermove
 
-int playermove(int, int) // allocate x, y variables to the same position on the grid to act out a player's move.
+void playermove(int, int) // allocate x, y variables to the same position on the grid to act out a player's move.
 {
     axis[x][y];
+    std::cout << "O to location: " << x << " , " << y << "."; 
 }
 
 
