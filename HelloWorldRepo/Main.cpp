@@ -1,7 +1,10 @@
 // ticTacToe_WireSharks.cpp Runner File
 // By Dorien Fields, Dylan De Muth
 
+
 #include <iostream>
+
+
 
 /*
 
@@ -16,14 +19,13 @@ class ticTacToe{
 };//class ticTacToe
 */  // Object-Oriented Design idea ends here
 
+// Global Variables
 
+int x = 0; // x axis for playermove
+int y = 0; // y axis for playermove
+std::string axis[3][3]; // Grid
 
-//Global Variables:
-std::string axis[3][3]; //board
-
-
-
-//Methods
+// Functions - 
 
 void clearBoard() //sets all elements to " "
 {                   
@@ -66,86 +68,75 @@ void cout_boardBLANK() {//prints board
 
 }//void cout_boardBLANK()
 
-/* To do: AI for opponent play. Most likely random inputs
-Would be easiest to implement, but needs to recognize where user has already input - Dorien */
-
-int x = 0; // x axis for playermove
-int y = 0; // y axis for playermove
-
-void playermove(int, int) // allocate x, y variables to the same position on the grid to act out a player's move.
+void playermove(int x, int y) // allocate x, y variables to the same position on the grid to act out a player's move.
 {
     axis[x][y];
-    std::cout << "O to location: " << x << " , " << y << "."; 
+    std::cout << "O to location: " << x << " , " << y << "." << "\n";
 }
+
 
 
 int main() {
 
-    //variables:
+    //Local Variables:
     std::string startGame_Input; //saves input from user to determine if game is ran
 
+    // Game Intialization
+    while (true) {
 
-    while (true) {//game run cycle through loop, 
-
-     //prompt:
+     //Start Game Prompt:
 
         std::cout << "Start a TicTacToe Game? (Y/N) "; //Asks user for input to start or exit game
         std::cin >> startGame_Input; //input for prompt
 
 
-       //conditions:
 
         if (startGame_Input.compare("Yes") == 0 || startGame_Input.compare("Y") == 0) { //start game input handling
 
-         //TEST
+        
             cout_boardBLANK();
-            //TEST
-
-            //call object for board and initiate a new game
-
-            std::cout << "You are X! Where would you like to move? Input a number for x axis and then y, from 0 to 2."; // Input to playermove variable to mark a spot on the grid.
+            
+            std::cout << "You are X! Where would you like to move? Input a number for x axis and then y, from 0 to 2." << "\n"; // Input to playermove variable to mark a spot on the grid.
 
             std::cin >> x;
-            if (x = 0, 1, 2) // Input validation for playermove variables
+            if (x <= -1 || x >= 3) // Input validation for playermove variables
             {
-                std::cin >> y;
-                if (y != 0, 1, 2) 
-                {
-                    std::cout << "Please enter a value from 0 to 2, defaulting to 1.";
-                    y = 1;
-                }
+                std::cout << "Please enter a value from 0 to 2, defaulting to 1." << "\n";
+                x = 1;
             }
             else
             {
-                std::cout << "Please enter a value from 0 to 2, defaulting to 1.";
-                x = 1;
+                std::cin >> y;
+                if (y != 0, y != 1, y != 2)
+                {
+                    std::cout << "Please enter a value from 0 to 2, defaulting to 1." << "\n";
+                    y = 1;
+                }
             }
+            playermove(x, y);
 
         /*To do: Everything else. Deciding ties, victories, opponent moves, etc.*/
             
 
-        }//if
+        } // End of game if player said "yes"
 
-        else if (startGame_Input.compare("No") == 0 || startGame_Input.compare("N") == 0) { //end game input handling
+        else if (startGame_Input.compare("No") == 0 || startGame_Input.compare("N") == 0) 
+        {
             std::cout << "\nGoodbye!" << std::endl;
             break;
-        }//elseif
+        } // End of game if player said "no"/
 
-        else { //invalid input handling
+        else 
+        { // Input validation
             std::cout << "\nInvalid Response, Please Enter Valid Response (Y/N)\n" << std::endl;
-        }//else
+        }
 
 
 
-    }//while
+    }// Game code ends here.
 
-    std::cout << "Thank you for playing.\n"; //end program statement
+    std::cout << "Thank you for playing.\n"; // End program message/signoff 
 
     return 0;
 
-}//main
-
-
-
-/*I personally suggest redoing this in C# if possible - comes with UI that would make Tic-Tac-Toe easier
-But I left some ToDos if we do go forward - Dorien */
+}// Code ends here
