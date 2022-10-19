@@ -2,6 +2,7 @@
 // By Dorien Fields, Dylan De Muth
 
 #include <iostream>
+#include <string>
 
 // Global Variables
 
@@ -278,6 +279,8 @@ int startGame() {
     int winner = 0; // Determines winner. 1 is X win, 2 is O win
     int rnd = 0;
 
+    std::string inputString;
+
     for (int round = 0; round <= 10; round++) {
 
         if (round % 2 == 0) {
@@ -288,8 +291,36 @@ int startGame() {
             std::cout << "You are O! Where would you like to move? Input a number for x axis and then y, from 0 to 2: " << "\n";
         }
 
-        std::cin >> x;//populates x
-        std::cin >> y;//populates y
+        // Quick & dirty code change to fix Wiresharks-17 - alpha input crashes game
+        //   ToDo - remove duplication
+        // read in row selection - keep going until we have a valid response
+        //   use string to integer - but note throws exception if alpha character entered
+        do {
+            x = 99;  // ToDo - remove hardcoded default value
+            std::cin >> inputString;
+            try {
+                x = stoi(inputString);
+            }
+            catch (const std::invalid_argument& ia) {
+                std::cout << "Invalid coordinate - please enter row value from 0-2\n";
+                continue;  // try again
+            }            
+        } while ((x != 0) && (x != 1) && (x != 2));
+
+        // read in column selection
+        do {
+            y = 99;  // ToDo - remove hardcoded default value
+            std::cin >> inputString;
+            try {
+                y = stoi(inputString);
+            }
+            catch (const std::invalid_argument& ia) {
+                std::cout << "Invalid coordinate - please enter column value from 0-2\n";
+                continue;  // try again
+            }
+        } while ((y != 0) && (y != 1) && (y != 2));
+
+        std::cout << "Move: " << x << " " << y << "\n";
 
         if (x <= -1 || x >= 3) // Input validation for playermove variables
         {
