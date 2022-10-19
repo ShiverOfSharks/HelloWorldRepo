@@ -307,6 +307,7 @@ int startGame() {
             }            
         } while ((x != 0) && (x != 1) && (x != 2));
 
+        // add a 2nd commit to the pull request
         // read in column selection
         do {
             y = 99;  // ToDo - remove hardcoded default value
